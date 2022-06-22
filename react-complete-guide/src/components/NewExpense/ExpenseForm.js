@@ -2,40 +2,21 @@ import { useState } from 'react';
 
 import './ExpenseForm.css'
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => { // add 'props' into input of function
     const [enteredTitle, setEnteredTitle] = useState('');
     const [enteredAmount, setEnteredAmount] = useState('');
     const [enteredDate, setEnteredDate] = useState('');
 
-    // // useState can also be combined into one object
-    // const [userInput, setUserInput] = useState({
-    //     enteredTitle: '',
-    //     enteredAmount: '',
-    //     enteredDate: '',
-    // });
-
     const titleChangeHandler = (event) => {
         setEnteredTitle(event.target.value);
-        // setUserInput({ // setting input for combined useState
-        //     ...userInput, // copy existing input references - if not done, other fields omitted
-        //     enteredTitle: event.target.value // update new input
-        // }); // However this is not the 'right' way to udpate. may use incorrect state snapshot.
-        // // CORRECT WAY TO WRITE 
-        // setUserInput((prevState) => {
-        //     return { ...prevState, enteredTitle: event.target.value };
-        // });
     };
+
     const amountChangeHandler = (event) => {
         setEnteredAmount(event.target.value);
-        // setUserInput((prevState) => {
-        //     return { ...prevState, enteredAmount: event.target.value };
-        // });
     };
+
     const dateChangeHandler = (event) => {
         setEnteredDate(event.target.value);
-        // setUserInput((prevState) => {
-        //     return { ...prevState, enteredDate: event.target.value };
-        // });
     };
 
     const submitHandler = (event) => {
@@ -46,7 +27,7 @@ const ExpenseForm = () => {
             amount: enteredAmount,
             date: new Date(enteredDate),
         };
-        console.log(expenseData);
+        props.onSaveExpenseData(expenseData); // use props from child, and pass expenseData into input
         setEnteredTitle('');
         setEnteredAmount('');
         setEnteredDate('');

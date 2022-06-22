@@ -29,9 +29,15 @@ function App() {
     },
   ];
 
+  // add placeholder // need to learn how to render lists of data dynamically
+  const addExpenseHandler = expense => {
+    console.log('in App.js');
+    console.log(expense);
+  }
+
   return (
     <div>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler} /> {/* can now call props in parent NewExpense.js */}
       <Expenses items={expenses} />
     </div>
   );
